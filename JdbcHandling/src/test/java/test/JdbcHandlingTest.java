@@ -1,31 +1,28 @@
+package test;
 
-	package test;
+import data.JdbcGiaoVien;
 
-	import data.JdbcPerson;
-	import domain.Person;
-	import java.util.List;
+public class JdbcHandlingTest {
+    public static void main(String[] args) {
+        System.out.println(">>> CHUONG TRINH DANG BAT DAU CHAY..."); // Thêm dòng này
+        
+        JdbcGiaoVien action = new JdbcGiaoVien();
 
-	public class JdbcHandlingTest {
+        System.out.println("--- DANG CAP NHAT TEN GV ---");
+        int checkUpdate = action.update("GV01", "Nguyen Van A (Update)");
+        System.out.println("So dong da cap nhat: " + checkUpdate);
+        
+     // Thử xóa giáo viên có mã GV05
+        int checkDel = action.delete("GV05");
+        System.out.println("So dong da xoa: " + checkDel);
 
-	    public static void main(String[] args) {
-	        JdbcPerson jdbcPerson = new JdbcPerson();
+        // Thử thêm và kiểm tra kết quả
+        int checkIns = action.insert("GV07", "Tran Van E", "Cu nhan", "Nam", 3.0, 10000000, "CNTT");
+        System.out.println("So dong da them: " + checkIns);
 
-	        // Test of the insert method
-	        // jdbcPerson.insert("Charly");
-
-	        // Test of the update method
-	        // jdbcPerson.update(1, "John");
-
-	        // Test the delete method, the id_person must exist in the database
-	        // jdbcPerson.delete(4);
-
-	        // Select method test
-	        // Use of a person object to encapsulate the information
-	        // of a database record
-	        List<Person> people = jdbcPerson.select();
-	        for (Person person : people) {
-	            System.out.print(person);
-	            System.out.println("");
-	        }
-	    }
+        System.out.println("\n--- DANH SACH GV NAM KHOA CNTT ---");
+        action.listNamCNTT();
+        
+        System.out.println("\n>>> CHUONG TRINH DA KET THUC."); // Thêm dòng này
+    }
 }

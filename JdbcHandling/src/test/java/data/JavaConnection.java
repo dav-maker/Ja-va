@@ -4,59 +4,58 @@ import java.sql.*;
 
 public class JavaConnection {
 
-	    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	    private static final String JDBC_URL = "jdbc:mysql://localhost/LT Java?useSSL=false";
-	    private static final String JDBC_USER = "Sha";
-	    private static final String JDBC_PASS = "Daunmisu1";
-	    private static Driver driver;
+    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String JDBC_URL =
+    		"jdbc:mysql://localhost/quanlygiaovien?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    private static final String JDBC_USER = "Sha";
+    private static final String JDBC_PASS = "Daunmisu1";
+    private static Driver driver;
 
-	    // So there are no problems when getting the connection of
-	    // concurrently, the word synchronized is used
-	    public static synchronized Connection getConnection() throws SQLException {
-	        if (driver == null) {
-	            try {
-	                Class.forName(JDBC_DRIVER);
-	           
-	            } catch (Exception e) {
-	                System.out.println("Failure to load the JDBC driver");
-	                e.printStackTrace(System.out);
-	            }
-	        }
+    // So there are no problems when getting the connection of concurrently,
+    // the word synchronized is used
+    public static synchronized Connection getConnection() throws SQLException {
 
-	        return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
-	    }
-
-	    
-//Close the ResultSet object
+        if (driver == null) {
+            try {
+                Class.forName(JDBC_DRIVER);
+                
+            } catch (Exception e) {
+                System.out.println("Failure to load the JDBC driver");
+                e.printStackTrace(System.out);
+            }
+        }
+        return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
+    }
+    
 public static void close(ResultSet rs) {
-    try {
-        if (rs != null) {
-            rs.close();
-        }
-    } catch (SQLException sqle) {
-        sqle.printStackTrace(System.out);
-    }
+	try {
+		if (rs != null) {
+			rs.close();
+		}
+	}
+	catch (SQLException sqle) {
+		sqle.printStackTrace(System.out);
+	}
 }
 
-// Close the PreparedStatement object
 public static void close(PreparedStatement stmt) {
-    try {
-        if (stmt != null) {
-            stmt.close();
-        }
-    } catch (SQLException sqle) {
-        sqle.printStackTrace(System.out);
-    }
+	try {
+		if (stmt != null) {
+			stmt.close();
+		}
+	}
+	catch (SQLException sqle) {
+		sqle.printStackTrace(System.out);
+	}
 }
 
-// Close the Connection object
 public static void close(Connection conn) {
-    try {
-        if (conn != null) {
-            conn.close();
-        }
-    } catch (SQLException sqle) {
-        sqle.printStackTrace(System.out);
-    }
+	try {
+		if (conn != null) {
+			conn.close();
+		}
+	}catch (SQLException sqle) {
+		sqle.printStackTrace(System.out);
+	}
 }
 }
